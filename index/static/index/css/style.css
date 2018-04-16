@@ -1,0 +1,73 @@
+
+.header{
+    
+    background-repeat:no-repeat;
+    background-position: top center;
+    background-image: url('../img/old.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 93vh;
+    position: relative;
+    color: #fff;
+    text-transform: uppercase;
+
+}
+.header .layout{
+    padding-top: 100px;
+    position: absolute;
+    top: 0;
+    left:0 ;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,.6);
+        
+}
+.layout span{
+    color: orange;
+}
+.layout p{
+    font-size: 20px;
+}
+.layout form{
+    background-color:white;
+    border-radius: 5px;
+    width:360px;
+    height: auto;
+    overflow: hidden;
+   
+}
+.layout h2{
+    color: black;
+    background-color: #f5f5f5;
+    text-align: center;
+    font-size: 20px;
+    padding: 15px;
+}
+.brand {
+    text-transform: uppercase;
+}
+.brand span {
+    
+    color: orange;
+}
+.form-control{
+    border: 0;
+    border-bottom: 1px solid #ced4da;
+    margin: auto;
+    width: 80%;
+
+}
+
+.layout form button {
+    background-color: orange;
+    border: 0;
+    width: 100%;
+    color: white;
+    padding: 15px;
+    
+}
+.bg-dark{
+    background-color: black !important;
+}
