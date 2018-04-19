@@ -54,7 +54,7 @@ def logIN(request):
 
 # valid password
 
-def valid_password(password,user=None):
+def valid_password(password, user=None):
 
     validators = get_default_password_validators()
 
