@@ -1,14 +1,15 @@
 
-from django.shortcuts import render, HttpResponse ,HttpResponseRedirect
+from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.password_validation import get_default_password_validators, ValidationError
 from django.contrib.auth import authenticate, login
 
 from . forms import userRegestration
 # Create your views here.
 
-def index(request):
 
-   return render(request, "index/index.html", context={'form': userRegestration()})
+def index(request):
+    return render(request, "index/index.html", context={'form': userRegestration()})
+
 
 def signup(request):
     if request.method == 'POST':
@@ -34,19 +35,16 @@ def signup(request):
             return HttpResponse("fail")
 
 
-
-
 def logIN(request):
     username = request.POST['username']
     password = request.POST['password']
 
-    user = authenticate(request,username=username,password=password)
+    user = authenticate(request, username=username, password=password)
 
     print(user)
     if user is not None:
         login(request, user)
-
-        return HttpResponse("personal page")
+        return redirect("start")
     else:
         return render(request, "index/index.html", context={'form': userRegestration(),
                                                             'logerror': 'username or password are not valid'})

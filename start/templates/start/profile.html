@@ -1,0 +1,131 @@
+<!doctype html>
+    <html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+      {% load static %}
+        <link rel="stylesheet" href='{% static "start/css/first.css" %}' type="text/css" media="screen" charset="utf-8" >
+    <title>Start</title>
+  </head>
+  <body>
+      <div class="container">
+         <div class="row wrapper">
+             <div class="one">
+                 <button id="myBtn" type="button" class="btn btn-primary btn-lg btn-responsive">Create a group</button>
+                    <div id="myModal" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Create your shit here</h2>
+                                <span class="close">&times;</span>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{% url 'start' %}" method="post">
+                                    {% load widget_tweaks %}
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label>Group name</label>
+                                        {{ form.name }}
+                                        <small class="form-text text-muted">Be creative and descriptive</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <span style="color:red;">{{error_password}}</span><br>
+                                        <label>Secret Code</label>
+
+                                        {{ form.secretcode }}
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="radio" class="form-check-input">
+                                        <label class="form-check-label">Click here if you are human</label>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" name="create">Create</button>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                            </div>
+                        </div>
+                 </div>
+            </div>
+             <div class="two">
+                <button id="myBtn1" type="button" class="btn btn-primary btn-lg btn-responsive">Join a group</button>
+                  <div id="myModal1" class="modal">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h2>Join your gay friends</h2>
+                                <span class="close">&times;</span>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{% url 'start' %}" method="post">
+                                    {% load widget_tweaks %}
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <span style="color:red;">{{ error_group }}</span><br>
+                                        <label>Group name</label>
+                                        {{ form1.name }}
+                                        <small id="emailHelp" class="form-text text-muted">I hope that you don't do some gay shit</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label >Secret Code</label>
+                                       {{ form1.secretcode }}
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" name="join">Join</button>
+                                </form>
+                            </div>
+                                <div class="modal-footer">
+                            </div>
+                        </div>
+                 </div>
+            </div>
+             <div class="three">
+                 <form action="{% url 'start' %}" method="post">
+                     {% csrf_token %}
+                     <button type="submit" class="btn btn-primary btn-lg btn-responsive" name="logout">Log out</button>
+                 </form>
+             </div>
+          </div>
+      </div>      
+<script>
+// Get the modal
+var modal = document.getElementById('myModal');
+var modal1 = document.getElementById('myModal1');
+    
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+var btn1 = document.getElementById("myBtn1");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+var span1 = document.getElementsByClassName("close")[1];
+
+// When the user clicks the button, open the modal 
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+btn1.onclick = function() {
+    modal1.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+span1.onclick = function() {
+    modal1.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+    if (event.target == modal1) {
+        modal1.style.display = "none";
+    }
+}
+</script>   
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+  </body>
+</html>
