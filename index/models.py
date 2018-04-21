@@ -4,9 +4,10 @@ from django.contrib.auth.models import User
 
 class Room(models.Model):
 
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     users = models.ManyToManyField(User, blank=True, related_name='user')
     secretcode = models.CharField(max_length=100)
+
 
 
 class Masseages(models.Model):
