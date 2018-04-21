@@ -31,6 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
+    'chatroom',
+    'widget_tweaks',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'start.apps.StartConfig',
     'index',
-    'widget_tweaks'
 ]
 
 MIDDLEWARE = [
@@ -121,3 +123,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+# Channels
+ASGI_APPLICATION = 'chatspace.routing.application'

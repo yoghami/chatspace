@@ -1,0 +1,81 @@
+body
+{
+    height: 100%;
+    background-image: url('../imgs/work.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.chat
+{
+    border-radius: 5px;
+    margin-top: 15%;
+    border:1px solid;
+    
+}
+
+.masseages
+{
+   
+    height: 400px; 
+    overflow-y: scroll;
+    background-color: rgba(0,0,0,.5);
+}
+
+.people
+{
+    
+    height: 50px;
+    width: inherit;
+    overflow-x: scroll;
+}
+//creat animations 
+
+@keyframes animatechat 
+{
+    from {right:-300px; opacity:0}
+    to {right:90px; opacity:1}
+}
+@keyframes animatenavbar 
+{
+    from {top:-300px; opacity:0}
+    to {top:10px; opacity:1}
+}
+.movechat
+{
+  
+    animation-name: animatechat;
+    animation-duration: 1s
+}
+.movenav
+{
+  
+    animation-name: animatenavbar;
+    animation-duration: 1s
+}
+
+//end of animations
+
+/* width */
+::-webkit-scrollbar 
+{
+    width: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0); 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #888; 
+}
+::-webkit-scrollbar-corner
+{
+    background: rgba(0,0,0,0);
+}
