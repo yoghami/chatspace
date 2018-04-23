@@ -16,6 +16,6 @@ class Masseages(models.Model):
 
     date = models.DateTimeField()
 
-    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='room')
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='masseages')
 
     sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sender')

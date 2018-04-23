@@ -66,15 +66,20 @@
     </div>
       <script>
           document.addEventListener('DOMContentLoaded',function(){
+              var masseages =  document.querySelector('.masseages');
+              var roomName = '{{room_name}}';
+              var chatSocket = new WebSocket('ws://' + window.location.host +'/ws/chat/' + roomName + '/loadprevious' +'/');
+                chatSocket.onmessage = function(e)
+                {
+                    var data = JSON.parse(e.data)
+                    alert(data["m"])
+                }
               
-                alert(document.querySelector('.masseages').scrollTop)
-                //var roomName = '{{room_name}}'
-                //var chatSocket = new WebSocket('ws://' + window.location.host +'/ws/chat/' + roomName + '/');
-                //chatSocket.onmessage = function(e){
-                    //var data = JSON.parse(e.data)
-                    
-                //}
+                masseages.onscroll = function ()
+                {
 
+                    
+                }
               
           });
       </script>
