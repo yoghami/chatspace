@@ -9,6 +9,17 @@ body {
   margin-top: 15%;
   border: 1px solid; }
 
+.userface {
+  padding: 10px 10px 10px 10px;
+  display: inline-block;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 5px; }
+
 .masseages {
   height: 400px;
   overflow-y: scroll;
