@@ -93,6 +93,58 @@
                 messageInputDom.value = '';
                 };
 
+          document.addEventListener('DOMContentLoaded',function(){
+             
+              var masseages =  document.querySelector('.masseages');
+              var chatSocket1 = new WebSocket('ws://' + window.location.host +'/ws/chat/' + roomName + '/loadprevious' +'/');
+                chatSocket1.onmessage = async  function(e)
+                {
+                    var data = JSON.parse(e.data)
+                    
+                    chat_pieces = data["masseages"]
+                    
+                    for(var i=0; i<chat_pieces.length; i++ )
+                        {
+                            ele = document.createElement('div');
+                            
+                            sender = document.createElement('a');
+                            sender.className='btn btn-primary disabled';
+                            sender.style.color = 'white'
+                            sender.append(chat_pieces[i]['user'] + "  ");
+                            
+                            ele.append(sender);
+                            ele.append("       "+chat_pieces[i]['text']);
+                            ele.dataset.id =chat_pieces[i]['pk'];
+                            ele.className = 'alert alert-info   ';
+                            
+                            masseages.insertBefore(ele,masseages.childNodes[0])
+                        }
+                    // just testing 
+                    //ele = document.createElement('div');
+                    //ele.append('rihs my firtsaa app');
+                    //ele.dataset.name = "mohaed"
+                    //masseages.insertBefore(ele,masseages.childNodes[0])
+                     //console.log(masseages.childNodes[0].dataset['name'])
+                }
+            
+                masseages.onscroll = async function ()
+                {
+                    masseage_at_top = masseages.firstElementChild.dataset.id;
+                    
+                    
+                    
+                    if( masseages.scrollTop == 0)
+                        {
+                            await sleep(1000);
+                            chatSocket.send(JSON.stringify({"id": masseage_at_top}));
+                        }
+                    
+                }
+                function sleep(ms) {
+                      return new Promise(resolve => setTimeout(resolve, ms));
+                    }
+              
+          });
       </script>
 
     <!-- Optional JavaScript -->
