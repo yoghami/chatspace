@@ -38,12 +38,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
         f.sender = User.objects.get(username=self.user.username)
         f.save()
 
+        send = {'text': message, 'username': self.user.username}
         # Send message to room group
         await self.channel_layer.group_send(
             self.room_group_name,
             {
                 'type': 'chat_message',
-                'message': message
+                'message': send
+
             }
         )
 
@@ -82,7 +84,8 @@ class loadprevious(WebsocketConsumer):
 
         data = json.loads(text_data)
         id = data['id']
-        room = Room.objects.filter(name=self.room_name).first()
+        print(id)
+        room = Room.objects.filter(name=(self.room_name).replace('"', '')).first()
         pervious_masseages = room.masseages.filter(pk__lt=id).order_by('-pk')[:7]
 
         listofchat = list()
