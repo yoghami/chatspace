@@ -14,7 +14,7 @@ class Masseages(models.Model):
 
     text = models.CharField(max_length=3000)
 
-    date = models.DateTimeField()
+    date = models.DateTimeField(auto_now_add=True, blank=True)
 
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='masseages')
 
