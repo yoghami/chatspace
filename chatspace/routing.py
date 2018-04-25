@@ -7,7 +7,7 @@ application = ProtocolTypeRouter(
     {
         'websocket': AuthMiddlewareStack(
                 URLRouter(
-                    chatroom.routing.load_previous
+                    chatroom.routing.ChatConsumer
                 )
             ),
     }
