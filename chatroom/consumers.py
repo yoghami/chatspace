@@ -84,7 +84,7 @@ class loadprevious(WebsocketConsumer):
 
         data = json.loads(text_data)
         id = data['id']
-        print(id)
+        #print(id)
         room = Room.objects.filter(name=(self.room_name).replace('"', '')).first()
         pervious_masseages = room.masseages.filter(pk__lt=id).order_by('-pk')[:7]
 
@@ -94,3 +94,27 @@ class loadprevious(WebsocketConsumer):
             listofchat.append(pieceofchat)
 
         self.send(text_data=json.dumps({"masseages": listofchat}))
+
+
+class SearchConsumers(WebsocketConsumer):
+    def connect(self):
+        self.roomName = self.scope['url_route']['kwargs']['roomName']
+        self.accept()
+    def close(self, code=None):
+        pass
+    def receive(self, text_data=None, bytes_data=None):
+
+        _data_ = json.loads(text_data)
+        first_chars = _data_["firstchars"]
+        first_masseage = _data_["firstmasseage"]
+
+        masseages_id=0
+        print(first_chars)
+        room = Room.objects.filter(name=(self.roomName).replace('"', '')).first()
+        try:
+            masseages_id = room.masseages.filter(text__icontains=first_chars).order_by('-pk').first().id
+
+        except:
+            self.send(text_data=json.dumps({"masseages_id": 0}))
+
+        self.send(text_data=json.dumps({"masseages_id": masseages_id, "diff": int(first_masseage)-masseages_id}))

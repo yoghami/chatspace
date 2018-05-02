@@ -18,7 +18,7 @@ body {
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
-  border-radius: 5px; }
+  border-radius: 5px  5px 0px 0px; }
 
 .masseages {
   height: 400px;

@@ -30,10 +30,9 @@
           </li>
    
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <div class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search">
+        </div>
       </div>
     </nav>
     <div class="container">
@@ -65,7 +64,11 @@
         </div>
     </div>
       <script>
+          
               var roomName = '{{room_name}}';
+          
+            
+          
               var chatSocket = new WebSocket('ws://' + window.location.host +'/ws/chat/' + roomName +'/');
                chatSocket.onmessage = function(e)
                {
@@ -83,8 +86,11 @@
                     div.className = 'alert alert-info   ';
                     
                     document.querySelector('#chat-log').appendChild(div);
-                    
+                
+                  
                     div.scrollIntoView();
+                
+                   
                };
                chatSocket.onclose = function(e) {
                    console.error('Chat socket closed unexpectedly')
@@ -105,10 +111,12 @@
                 };
 
           document.addEventListener('DOMContentLoaded',function(){
+              
+              var searchsocket = new  WebSocket('ws://' + window.location.host +'/ws/chat/' + roomName + '/search' +'/');
              
               var masseages =  document.querySelector('.masseages');
               var chatSocket1 = new WebSocket('ws://' + window.location.host +'/ws/chat/' + roomName + '/loadprevious' +'/');
-                chatSocket1.onmessage = async  function(e)
+                chatSocket1.onmessage = async function(e)
                 {
                     var data = JSON.parse(e.data)
                     
@@ -126,34 +134,84 @@
                             ele.append(sender);
                             ele.append("       "+chat_pieces[i]['text']);
                             ele.dataset.id =chat_pieces[i]['pk'];
+                            ele.id = "ass"+chat_pieces[i]['pk'] ;
                             ele.className = 'alert alert-info   ';
                             
                             masseages.insertBefore(ele,masseages.childNodes[0])
                         }
+                    
+                    masseages.children[chat_pieces.length-1].scrollIntoView();
                     // just testing 
                     //ele = document.createElement('div');
                     //ele.append('rihs my firtsaa app');
                     //ele.dataset.name = "mohaed"
                     //masseages.insertBefore(ele,masseages.childNodes[0])
                      //console.log(masseages.childNodes[0].dataset['name'])
+                    
                 }
+                
             
                 masseages.onscroll = async function ()
                 {
+                    
                     masseage_at_top = masseages.firstElementChild.dataset.id;
-                    
-                    
                     
                     if( masseages.scrollTop == 0)
                         {
+                            
                             await sleep(100);
                             chatSocket1.send(JSON.stringify({"id": masseage_at_top}));
                         }
                     
                 }
-                function sleep(ms) {
-                      return new Promise(resolve => setTimeout(resolve, ms));
+                
+                searchsocket.onclose= async function()
+                {
+                    searchsocket = new  WebSocket('ws://' + window.location.host +'/ws/chat/' + roomName + '/search' +'/');
+                }
+                searchsocket.onmessage = async function(e)
+                {
+                    data = JSON.parse(e.data);
+                    id = 'ass'+data["masseages_id"];
+                    result = document.getElementById(id);
+                    if(result)
+                    {
+                        document.getElementById(id).scrollIntoView();
+              
                     }
+                    else
+                        {
+                            for(i=0; i<data["diff"] ; i++)
+                            {
+                                masseages.scrollTop=0;
+                               
+                                
+                            }
+                           
+                        }
+                   
+                }
+                
+                document.querySelector("#search").onkeyup = async function()
+                {
+                    firstchars = document.querySelector("#search").value;
+                    
+                        console.log(firstchars)
+                    if(document.querySelector("#search").value != null)
+                        {
+                            searchsocket.send(JSON.stringify({"firstchars": firstchars, "firstmasseage":masseages.firstElementChild.dataset.id}))
+                        }
+                    
+                }
+                
+                
+                
+                function sleep(ms) 
+              {
+                  return new Promise(resolve => setTimeout(resolve, ms));
+              }
+              
+              
               
           });
       </script>
