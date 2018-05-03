@@ -113,8 +113,10 @@ class SearchConsumers(WebsocketConsumer):
         room = Room.objects.filter(name=(self.roomName).replace('"', '')).first()
         try:
             masseages_id = room.masseages.filter(text__icontains=first_chars).order_by('-pk').first().id
-
+            print(masseages_id)
         except:
-            self.send(text_data=json.dumps({"masseages_id": 0}))
+            self.send(text_data=json.dumps({"masseages_id": 0, "diff": 0}))
+            return
 
         self.send(text_data=json.dumps({"masseages_id": masseages_id, "diff": int(first_masseage)-masseages_id}))
+       
