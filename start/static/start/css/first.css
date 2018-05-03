@@ -4,6 +4,7 @@ body {
     background-position: center center;
     background-attachment: fixed;
     background-size: cover;
+    height: 100%
 }
 
 .btn-responsive {
@@ -12,8 +13,7 @@ body {
 }
 
 .wrapper {
-    position: absolute;
-    top: 50%;
+    margin-top: 35%;
 }
 
 .one {
@@ -23,6 +23,12 @@ body {
     margin-right: 100px;
 }
 
+.rooms
+{
+    text-align: center;
+    margin-top: 10%;
+    
+}
 /* Modal Content */
 .modal-content {
     position: relative;

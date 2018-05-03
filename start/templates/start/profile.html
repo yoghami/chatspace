@@ -1,5 +1,5 @@
-<!doctype html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,7 +11,7 @@
   <body>
       <div class="container">
          <div class="row wrapper">
-             <div class="one">
+             <div class="col-md-4 col-xs-4 col-sm-4 ">
                  <button id="myBtn" type="button" class="btn btn-primary btn-lg btn-responsive">Create a group</button>
                     <div id="myModal" class="modal">
                         <div class="modal-content">
@@ -46,15 +46,15 @@
                         </div>
                  </div>
             </div>
-             <div class="two">
+             <div class="col-md-4 col-xs-4 col-sm-4 ">
                 <button id="myBtn1" type="button" class="btn btn-primary btn-lg btn-responsive">Join a group</button>
                   <div id="myModal1" class="modal">
-                        <div class="modal-content">
+                        <div class="modal-content form-group">
                             <div class="modal-header">
                                 <h2>Join your gay friends</h2>
                                 <span class="close">&times;</span>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body ">
                                 <form action="{% url 'start' %}" method="post">
                                     {% load widget_tweaks %}
                                     {% csrf_token %}
@@ -71,17 +71,30 @@
                                     <button type="submit" class="btn btn-primary" name="join">Join</button>
                                 </form>
                             </div>
-                                <div class="modal-footer">
+                            <div class="modal-footer">
                             </div>
                         </div>
                  </div>
             </div>
-             <div class="three">
+             <div class="col-md-4 col-xs-4 col-sm-4 ">
                  <form action="{% url 'start' %}" method="post">
                      {% csrf_token %}
                      <button type="submit" class="btn btn-primary btn-lg btn-responsive" name="logout">Log out</button>
                  </form>
              </div>
+          </div>
+          <div class="row rooms">
+              <div class="col-md-4 col-xs-4 col-sm-4"></div>
+              <div class="col-md-4 col-xs-4 col-sm-4">
+                <div class="alert alert-primary " role="button" aria-disabled="true" style="text-align: center;">Rooms you are joined<br>
+               
+                 {% for room in rooms %}
+                         <a  class="badge badge-danger" href="{% url 'chatroom' room.name %}">{{room.name}}</a>
+                  {% endfor %}
+                </div>
+               
+              </div>
+              <div class="col-md-4 col-xs-4 col-sm-4"></div>
           </div>
       </div>      
 <script>

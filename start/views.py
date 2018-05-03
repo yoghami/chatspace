@@ -8,6 +8,8 @@ from index.models import Room
 
 def start(request):
     if request.user.is_authenticated:
+        rooms = Room.objects.filter(users=request.user)
+        print(rooms)
         if request.method == 'POST' and 'create' in request.POST:
             form = RoomForm(request.POST)
             if form.is_valid():
@@ -19,7 +21,7 @@ def start(request):
                     return HttpResponse("Go to the new created room")
                 else:
                     return render(request, 'start/profile.html', context={'form': RoomForm(),
-                                                                          'error_password': error})
+                                                                          'error_password': error,'rooms':rooms})
             else:
                 return HttpResponse("form not valid")
         elif request.method == 'POST' and 'join' in request.POST:
@@ -30,20 +32,20 @@ def start(request):
                     temp = Room.objects.filter(name=request.POST['name'], secretcode=request.POST['secretcode']).first()
                     if temp is None:
                         return render(request, 'start/profile.html', context={'form': RoomForm(), 'form1': JoinForm(),
-                                                                            'error_group': "Invalid group or password"})
+                                                                            'error_group': "Invalid group or password",'rooms':rooms})
                     else:
                         temp.users.add(request.user)
                         return HttpResponse("Joining the room")
                 else:
                     return render(request, 'start/profile.html', context={'form': RoomForm(), 'form1': JoinForm(),
-                                                                          'error_group': "Invalid group or password"})
+                                                                          'error_group': "Invalid group or password",'rooms':rooms})
             else:
                 return HttpResponse("Your say shit")
         elif request.method == 'POST' and 'logout' in request.POST:
             logout(request)
             return redirect('index')
         elif request.method == 'GET':
-            return render(request, 'start/profile.html', context={'form': RoomForm(), 'form1': JoinForm()})
+            return render(request, 'start/profile.html', context={'form': RoomForm(), 'form1': JoinForm(),'rooms':rooms})
     else:
         return HttpResponse("Lie")
 

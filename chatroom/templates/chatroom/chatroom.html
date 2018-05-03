@@ -23,10 +23,10 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="{% url 'start' %}">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Logout</a>
+            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
           </li>
    
         </ul>
@@ -179,7 +179,7 @@
                         document.getElementById(id).scrollIntoView();
               
                     }
-                    else if(data["diff"]!= '0')
+                    else if(data["diff"]!= 0)
                         {
                             for(i=0; i<data["diff"]/7 ; i++)
                             {
@@ -188,8 +188,7 @@
                                 
                                
                                 await sleep(200);
-                                console.log( i);
-                                console.log(data["diff"]);
+                    
                             }
                             document.getElementById(id).scrollIntoView();
                            
