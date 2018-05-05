@@ -117,6 +117,5 @@ class SearchConsumers(WebsocketConsumer):
         except:
             self.send(text_data=json.dumps({"masseages_id": 0, "diff": 0}))
             return
-
         self.send(text_data=json.dumps({"masseages_id": masseages_id, "diff": int(first_masseage)-masseages_id}))
        
